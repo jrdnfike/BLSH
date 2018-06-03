@@ -1,0 +1,34 @@
+---
+# Perform APT update
+- name: Upgrade APT data
+  apt: update_cache=yes cache_valid_time=3600
+  tags: ubuntu
+
+# Perform APT upgrade
+- name: Upgrade APT packages to the latest
+  apt: upgrade=safe
+  tags: ubuntu
+
+# Install Web Server
+- name: Install Apache on Ubuntu
+  package:
+    name: apache2
+    state: present
+  tags: ubuntu
+
+# Enable Web Server at Boot
+- name: Enable HTTPD Service [Boot ON]
+  service:
+    name: apache2
+    state: started
+    enabled: yes
+  tags: ubuntu
+
+# Install Common Utilities
+- name: Install Common Utilities
+  apt: state=installed pkg={{ item }}
+  with_items:
+    - htop
+    - nano
+    - vim
+  tags: ubuntu

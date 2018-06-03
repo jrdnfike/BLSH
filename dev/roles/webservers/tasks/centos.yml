@@ -1,0 +1,34 @@
+---
+# Perform FULL System Update
+- name: Upgrade All Packages - Yum
+  yum: name=* state=latest
+  tags: centos
+
+# Install EPEL
+- name: Install EPEL
+  yum: name=epel-release state=installed
+  tags: centos
+
+# Install Web Server
+- name: Install HTTPD centos
+  package:
+    name: "httpd"
+    state: present
+  tags: centos
+
+# Enable Web Server at Boot
+- name: Enable HTTPD Service [BOOT ON]
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+  tags: centos
+
+# Install Common Utilities
+- name: Install Common Utilities
+  yum: name={{ item }} state=installed
+  with_items:
+    - htop
+    - nano
+    - vim
+  tags: centos

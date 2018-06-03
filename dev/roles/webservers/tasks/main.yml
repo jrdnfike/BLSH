@@ -1,0 +1,7 @@
+- name: Determine OS for configuration and apply correct parameters.
+  import_task: centos.yml
+  when: ansible_distribution|lower == "centos"
+
+- name: Determine OS for configuration and apply correct parameters.
+  import_task: ubuntu.yml
+  when: ansible_distribution|lower == "ubuntu"
