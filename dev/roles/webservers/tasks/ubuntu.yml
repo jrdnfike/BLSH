@@ -9,6 +9,14 @@
   apt: upgrade=safe
   tags: ubuntu
 
+# Remove apparmor - keep linux distro consistency
+- name: Remove apparmor in favor of selinux
+  apt: state=absent pkg={{ item }}
+  with_items:
+    - apparmor
+    - apparmor-utils
+  tags: ubuntu
+
 # Install Web Server
 - name: Install Apache on Ubuntu
   package:
@@ -38,8 +46,23 @@
   apt: state=installed pkg={{ item }}
   with_items:
     - ufw
+    - fail2ban
+    - auditd
+    - logwatch
+    - selinux
+    - python-selinux
+    - selinux-policy-ubuntu
   tags: ubuntu
 
 # Configure UFW
 - import_tasks: ufw.yml
   when: ansible_distribution|lower =="ubuntu"
+
+# Configure selinux
+- import_tasks: selinux.yml
+
+# Configure auditd
+- import_tasks: auditd.yml
+
+# Move fail2ban config to remote host
+- import_tasks: update-configs.yml

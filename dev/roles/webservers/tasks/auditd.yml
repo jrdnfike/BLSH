@@ -1,0 +1,38 @@
+---
+# Enable file level auditing
+- name: Setup auditd service
+  service:
+    name: auditd
+    state: started
+    enabled: yes
+  tags: security
+
+# Configure a few watch rules
+
+# Configure a rule to watch /etc/passwd
+- name: Configure a rule to watch /etc/passwd
+  become: yes
+  shell: auditctl -w /etc/passwd -p war -k password-file
+  ignore_errors: True
+  tags: security
+
+# Configure a rule to watch /etc/shadow
+- name: Configure a rule to watch /etc/shadow
+  become: yes
+  shell: auditctl -w /etc/shadow -p warx -k shadow-file
+  ignore_errors: True
+  tags: security
+
+# Configure a rule to watch /tmp
+- name: Configure a rule to watch /tmp
+  become: yes
+  shell: auditctl -w /tmp -p warx -k watch-tmp
+  ignore_errors: True
+  tags: security
+
+# Configure a rule to watch /var/www
+- name: Configure a rule to watch /var/www
+  become: yes
+  shell: auditctl -w /var/www -p warx -k web-folder
+  ignore_errors: True
+  tags: security

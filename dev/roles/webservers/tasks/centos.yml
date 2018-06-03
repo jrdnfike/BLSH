@@ -33,6 +33,23 @@
     - vim
   tags: centos
 
+# Install Common Security Components
+- name: Install Common Security Components
+  yum: state=installed name={{ item }}
+  with_items:
+    - fail2ban
+    - logwatch
+  tags: centos
+
 # Configure firewalld
 - import_tasks: firewalld.yml
   when: ansible_distribution|lower == "centos"
+
+# Configure selinux
+- import_tasks: selinux.yml
+
+# Configure auditd
+- import_tasks: auditd.yml
+
+# Move fail2ban config to remote host
+- import_tasks: update-configs.yml

@@ -1,0 +1,9 @@
+---
+# Move fail2ban config file to remote host
+- name: Place fail2ban config file on remote host
+  copy:
+    src: jail.conf
+    dest: /etc/fail2ban/jail.conf
+    owner: root
+    group: root
+    mode: u=rw, g=r, o=r

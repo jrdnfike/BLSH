@@ -1,0 +1,6 @@
+---
+# Enable selinux - Logging actions that would have been blocked
+# Permissive Mode, can change to enforcing mode
+- selinux:
+    policy: targeted
+    state: permissive
