@@ -6,8 +6,8 @@
   service:
     name: fail2ban
     state: restarted
-    become: true
-    listen: "restart security services"
+  become: true
+  listen: "restart security services"
   tags: security
 
 # Restart auditd service
@@ -15,8 +15,8 @@
   service:
     name: auditd
     state: restarted
-    become: true
-    listen: "restart security services"
+  become: true
+  listen: "restart security services"
   tags: security
 
 # Restart ufw
@@ -24,8 +24,8 @@
   service:
     name: ufw
     state: restarted
-    become: true
-    listen: "restart ubuntu service"
+  become: true
+  listen: "restart ubuntu service"
   tags: security
 
 # Restart firewalld
@@ -33,6 +33,6 @@
   service:
     name: firewalld
     state: restarted
-    become: true
-    listen: "restart centos service"
+  become: true
+  listen: "restart centos service"
   tags: security
