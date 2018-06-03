@@ -39,3 +39,7 @@
   with_items:
     - ufw
   tags: ubuntu
+
+# Configure UFW
+- import_tasks: ufw.yml
+  when: ansible_distribution|lower =="ubuntu"
