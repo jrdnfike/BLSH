@@ -1,0 +1,25 @@
+---
+
+# Enable HTTPS Traffic
+- name: Allow Web Traffic - HTTPS
+  firewalld:
+    service: https
+    permanent: true
+    state: enabled
+  tags: centos
+
+# Enable HTTP Traffic
+- name: Allow Web Traffic - HTTP
+  firewalld:
+    service: http
+    permanent: true
+    state: enabled
+  tags: centos
+
+# Enable SSH Traffic
+- name: Enable SSH Traffic
+  firewalld:
+    service: ssh
+    permanent: true
+    state: enabled
+  tags: centos
