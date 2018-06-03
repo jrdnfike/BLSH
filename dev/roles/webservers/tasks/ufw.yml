@@ -3,7 +3,7 @@
 - name: Enable UFW and Deny All Traffic
   ufw:
     state: enabled
-    policy: Deny
+    policy: deny
   tags: ubuntu
 
 # Enable Logging
@@ -15,7 +15,7 @@
 # Deny auth traffic that fails login.
 - name: Deny brute force login attempts
   ufw:
-    rule: Deny
+    rule: deny
     port: auth
     log: yes
   tags: ubuntu
