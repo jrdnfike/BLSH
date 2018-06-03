@@ -23,7 +23,7 @@
 # Rate Limit Traffic - Brute Force Traffic
 - name: Rate Limit - Brute Force Login attempts
   ufw:
-    rule: Limit
+    rule: limit
     port: ssh
     proto: tcp
   tags: ubuntu
