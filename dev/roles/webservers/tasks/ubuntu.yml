@@ -32,3 +32,10 @@
     - nano
     - vim
   tags: ubuntu
+
+# Install Common Security Components
+- name: Install Common Security Components
+  apt: state=installed pkg={{ item }}
+  with_items:
+    - ufw
+  tags: ubuntu

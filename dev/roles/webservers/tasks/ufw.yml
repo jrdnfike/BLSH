@@ -1,0 +1,62 @@
+---
+# Default Deny Everything
+- name: Enable UFW and Deny All Traffic
+  ufw:
+    state: enabled
+    policy: Deny
+  tags: ubuntu
+
+# Enable Logging
+- name: Enable Logging
+  ufw:
+    logging: on
+  tags: ubuntu
+
+# Deny auth traffic that fails login.
+- name: Deny brute force login attempts
+  ufw:
+    rule: Deny
+    port: auth
+    log: yes
+  tags: ubuntu
+
+# Rate Limit Traffic - Brute Force Traffic
+- name: Rate Limit - Brute Force Login attempts
+  ufw:
+    rule: Limit
+    port: ssh
+    proto: tcp
+  tags: ubuntu
+
+# Allow SSH Traffic
+- name: Allow SSH Access
+  ufw:
+    rule: allow
+    port: 22
+    proto: tcp
+  tags: ubuntu
+
+# Allow HTTP Traffic
+- name: Allow HTTP TCP Port 80 Traffic
+  ufw:
+    rule: allow
+    port: 80
+  tags: ubuntu
+
+# Allow HTTPS Traffic
+- name: Allow HTTPS TCP Port 443 Traffic
+  ufw:
+    rule: allow
+    port: 443
+  tags: ubuntu
+
+# Allow local traffic without restrictions
+- name: Allow Local Traffic on Private IP Ranges
+  ufw:
+    rule: allow
+    src: '{{ item }}'
+  with_items:
+    - 192.168.0.0/16
+    - 10.0.0.0/8
+    - 172.16.0.0/16
+  tags: ubuntu

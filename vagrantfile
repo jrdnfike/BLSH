@@ -1,0 +1,48 @@
+Vagrant.configure("2") do |config|
+
+	config.vm.define "ansible" do |ansible|
+
+		ansible.vm.box = "bento/ubuntu-16.04"
+		ansible.vm.hostname = "ansible"
+		ansible.vm.network "private_network", ip: "192.168.10.10"
+
+		ansible.vm.post_up_message = "Ansible Control Machine"
+
+			config.vm.provider :virtualbox do |vm|
+
+				vm.name = "blsh-ansible-control"
+
+			end
+
+	end
+
+
+	config.vm.define "web" do |web|
+
+		web.vm.box = "bento/ubuntu-16.04"
+		web.vm.hostname = "web"
+		web.vm.network "private_network", ip: "192.168.10.20"
+		web.vm.post_up_message = "Web Server"
+
+			config.vm.provider :virtualbox do |vm|
+
+				vm.name = "blsh-web-server"
+
+			end
+	end
+
+
+	config.vm.define "cent" do |cent|
+
+		cent.vm.box = "bento/centos-7.2"
+		cent.vm.hostname = "blsh-test"
+		cent.vm.network "private_network", ip: "192.168.10.30"
+
+			config.vm.provider :virtualbox do |vm|
+
+				vm.name = "blsh-centos-test"
+
+			end
+	end
+
+end
