@@ -66,3 +66,13 @@
 
 # Move fail2ban config to remote host
 - import_tasks: update-configs.yml
+
+# Perform needed service restarts
+- name: restart security services [Apply Config Changes]
+  command: echo "Called the restart on all services [Security Related]"
+  notify: "restart security services"
+
+# Perform needed Ubuntu only service restarts
+- name: Restart Ubuntu related services only
+  command: echo "Called the restart on all Ubuntu [Services]"
+  notify: "restart ubuntu service"

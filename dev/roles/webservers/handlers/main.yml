@@ -1,0 +1,38 @@
+---
+# Handlers are run in the order they are defined.
+
+# Restart fail2ban
+- name: Restart fail2ban
+  service:
+    name: fail2ban
+    state: restarted
+    become: true
+    listen: "restart security services"
+  tags: security
+
+# Restart auditd service
+- name: Restart auditd
+  service:
+    name: auditd
+    state: restarted
+    become: true
+    listen: "restart security services"
+  tags: security
+
+# Restart ufw
+- name: Restart ufw
+  service:
+    name: ufw
+    state: restarted
+    become: true
+    listen: "restart ubuntu service"
+  tags: security
+
+# Restart firewalld
+- name: Restart firewalld
+  service:
+    name: firewalld
+    state: restarted
+    become: true
+    listen: "restart centos service"
+  tags: security
